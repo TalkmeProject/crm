@@ -1,5 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="com.hlebik.crm.enumerated.Status" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib  uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 
 <html>
@@ -8,9 +10,9 @@
     <title>List Customers</title>
 
     <link type="text/css" rel="stylesheet"
-          href="${pageContext.request.contextPath}/resources/css/style.css" />
+          href="${pageContext.request.contextPath}/resources/css/style.css"/>
     <link type="text/css" rel="stylesheet"
-          href="${pageContext.request.contextPath}/resources/css/add-customer-style.css" />
+          href="${pageContext.request.contextPath}/resources/css/add-customer-style.css"/>
 </head>
 
 <body>
@@ -28,19 +30,29 @@
             <tbody>
             <tr>
                 <td><label>First name:</label></td>
-                <td><form:input path="firstName" /></td>
+                <td><form:input path="firstName"/></td>
             </tr>
             <tr>
                 <td><label>Last name:</label></td>
-                <td><form:input path="lastName" /></td>
+                <td><form:input path="lastName"/></td>
             </tr>
             <tr>
                 <td><label>Email:</label></td>
-                <td><form:input path="email" /></td>
+                <td><form:input path="email"/></td>
+            </tr>
+            <tr>
+                <td><label>Status:</label></td>
+                <td>
+                    <spring:bind path="status">
+                        <form:select path="customer.customerStatusDto.status">
+                            <form:options items="status.values()"/>
+                        </form:select>
+                    </spring:bind>
+                </td>
             </tr>
             <tr>
                 <td><label></label></td>
-                <td><input type="submit" value="Save" class="save" /></td>
+                <td><input type="submit" value="Save" class="save"/></td>
             </tr>
             </tbody>
         </table>

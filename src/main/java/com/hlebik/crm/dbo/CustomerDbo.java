@@ -2,6 +2,8 @@ package com.hlebik.crm.dbo;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -18,4 +20,10 @@ public class CustomerDbo {
     private String lastName;
     @Column(name = "email")
     private String email;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "customer_status_id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private CustomerStatusDbo customerStatusDbo;
 }
