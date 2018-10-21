@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="idglebik" id="create table customer">
+        <createTable tableName="customer">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="customer_pk"/>
+            </column>
+            <column name="first_name" type="VARCHAR(64)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_name" type="VARCHAR(64)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(64)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <insert tableName="customer">
+            <column name="first_name">David</column>
+            <column name="last_name">Adams</column>
+            <column name="email">david@luv2code.com</column>
+        </insert>
+        <insert tableName="customer">
+            <column name="first_name">John</column>
+            <column name="last_name">Doe</column>
+            <column name="email">john@luv2code.com</column>
+        </insert>
+        <insert tableName="customer">
+            <column name="first_name">Ajay</column>
+            <column name="last_name">Rao</column>
+            <column name="email">ajay@luv2code.com</column>
+        </insert>
+        <insert tableName="customer">
+            <column name="first_name">Mary</column>
+            <column name="last_name">Public</column>
+            <column name="email">mary@luv2code.com</column>
+        </insert>
+        <insert tableName="customer">
+            <column name="first_name">Maxwell</column>
+            <column name="last_name">Dixon</column>
+            <column name="email">max@luv2code.com</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
