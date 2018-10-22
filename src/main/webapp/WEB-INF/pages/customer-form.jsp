@@ -43,11 +43,10 @@
             <tr>
                 <td><label>Status:</label></td>
                 <td>
-                    <spring:bind path="status">
-                        <form:select path="customer.customerStatusDto.status">
-                            <form:options items="status.values()"/>
-                        </form:select>
-                    </spring:bind>
+                <form:select path="customerStatusDto.status">
+                    <form:options items="${status}"/>
+                </form:select>
+
                 </td>
             </tr>
             <tr>

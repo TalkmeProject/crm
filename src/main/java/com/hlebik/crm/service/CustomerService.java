@@ -2,6 +2,7 @@ package com.hlebik.crm.service;
 
 import com.hlebik.crm.converter.CustomerConverter;
 import com.hlebik.crm.dbo.CustomerDbo;
+import com.hlebik.crm.dbo.CustomerStatusDbo;
 import com.hlebik.crm.dto.CustomerDto;
 import com.hlebik.crm.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerConverter customerConverter;
+    private final CustomerStatusService customerStatusService;
 
     public List<CustomerDto> getCustomers() {
         List<CustomerDbo> customerDbos = customerRepository.findAll(Sort.by("lastName"));
@@ -24,6 +26,8 @@ public class CustomerService {
 
     public void saveCustomer(CustomerDto customerDto) {
         CustomerDbo customerDbo = customerConverter.convertToDbo(customerDto);
+        CustomerStatusDbo customerStatusDbo = customerStatusService.getStatus(customerDbo.getCustomerStatusDbo());
+        customerDbo.setCustomerStatusDbo(customerStatusDbo);
         customerRepository.save(customerDbo);
     }
 

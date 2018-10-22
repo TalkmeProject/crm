@@ -64,7 +64,13 @@
             <column name="status">ACTIVE</column>
         </insert>
         <insert tableName="customer_status">
-            <column name="status">DISABLE</column>
+            <column name="status">DISABLED</column>
+        </insert>
+        <insert tableName="customer_status">
+            <column name="status">NEW</column>
+        </insert>
+        <insert tableName="customer_status">
+            <column name="status">BLOCKED</column>
         </insert>
 
     </changeSet>
