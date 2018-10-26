@@ -11,5 +11,8 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div><input type="submit" value="Sign In" class="save"/></div>
         </form>
+           <p>
+                <a href="/registration">Registration</a>
+            </p>
     </body>
 </html>
