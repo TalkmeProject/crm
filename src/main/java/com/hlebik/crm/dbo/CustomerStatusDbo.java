@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name="customer_status")
+@Table(name = "customer_status")
 public class CustomerStatusDbo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

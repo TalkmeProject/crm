@@ -1,19 +1,21 @@
 package com.hlebik.crm.dto;
 
+import com.hlebik.crm.enumerated.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
-public class CustomerDto {
+public class UserDto {
     private long id;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String userName;
+    private String password;
+    private boolean active;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private CustomerStatusDto customerStatusDto;
-
+    private Set<Role> roles;
 }
