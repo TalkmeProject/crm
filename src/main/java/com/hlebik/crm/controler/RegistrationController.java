@@ -24,4 +24,10 @@ public class RegistrationController {
     public String addUser(@ModelAttribute("user") UserDto user, Model model) {
         return userService.makeRegistration(user, model);
     }
+
+    @GetMapping("/")
+    public String main(Model model) {
+
+        return "redirect:list-customers";
+    }
 }
