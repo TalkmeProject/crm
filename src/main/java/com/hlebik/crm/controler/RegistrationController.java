@@ -28,6 +28,6 @@ public class RegistrationController {
     @GetMapping("/")
     public String main(Model model) {
 
-        return "redirect:list-customers";
+        return "redirect:/customer/list";
     }
 }

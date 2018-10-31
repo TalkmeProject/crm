@@ -16,6 +16,9 @@
             <column name="email" type="VARCHAR(64)">
                 <constraints nullable="true"/>
             </column>
+            <column name="main_image" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
             <column name="customer_status_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -24,30 +27,35 @@
             <column name="first_name">David</column>
             <column name="last_name">Adams</column>
             <column name="email">david@luv2code.com</column>
+            <column name="main_image">https://picsum.photos/40/40/?image=10</column>
             <column name="customer_status_id">1</column>
         </insert>
         <insert tableName="customer">
             <column name="first_name">John</column>
             <column name="last_name">Doe</column>
             <column name="email">john@luv2code.com</column>
+            <column name="main_image">https://picsum.photos/40/40/?image=20</column>
             <column name="customer_status_id">1</column>
         </insert>
         <insert tableName="customer">
             <column name="first_name">Ajay</column>
             <column name="last_name">Rao</column>
             <column name="email">ajay@luv2code.com</column>
+            <column name="main_image">https://picsum.photos/40/40/?image=30</column>
             <column name="customer_status_id">1</column>
         </insert>
         <insert tableName="customer">
             <column name="first_name">Mary</column>
             <column name="last_name">Public</column>
             <column name="email">mary@luv2code.com</column>
+            <column name="main_image">https://picsum.photos/40/40/?image=40</column>
             <column name="customer_status_id">1</column>
         </insert>
         <insert tableName="customer">
             <column name="first_name">Maxwell</column>
             <column name="last_name">Dixon</column>
             <column name="email">max@luv2code.com</column>
+            <column name="main_image">https://picsum.photos/40/40/?image=50</column>
             <column name="customer_status_id">1</column>
         </insert>
     </changeSet>

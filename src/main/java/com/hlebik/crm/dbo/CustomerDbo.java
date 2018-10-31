@@ -20,6 +20,8 @@ public class CustomerDbo {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "main_image")
+    private String mainImage;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "customer_status_id")

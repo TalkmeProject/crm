@@ -2,19 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example </title>
+    <title>List Customers</title>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/add-customer-style.css}" rel="stylesheet" />
 </head>
 <body>
+<div id="wrapper">
+    <div id="header">
+        <h2>CRM - Customer Relationship Manager</h2>
+    </div>
+</div>
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
+<div id="container" class="loginConf">
+    <form th:action="@{/login}" method="post">
+        <div><label class="labelConf"> User Name : </label><input type="text" name="username"/> </div>
+        <div><label class="labelConf"> Password: </label><input type="password" name="password"/> </div>
+        <div><input type="submit" value="Sign In" class="save"/></div>
+    </form>
+</div>
+<p>
+    <a href="/registration">Registration</a>
+</p>
 </body>
 </html>
