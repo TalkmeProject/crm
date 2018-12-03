@@ -18,7 +18,7 @@
 </div>
 <div id="container">
     <h3>Save Customer</h3>
-    <form th:action="@{saveCustomer}" th:object="${customer}"
+    <form th:action="@{saveCustomer}" th:object="${customer}" enctype="multipart/form-data"
                method="POST">
         <input type="hidden" name="id" th:value="${customer.id}"/>
         <table>
@@ -36,6 +36,10 @@
                 <td><input type="text" name="email" th:field="*{email}"/></td>
             </tr>
             <tr>
+                <td><label>Image:</label></td>
+                <td><div th:insert="uploadForm :: uploadForm"/></td>
+            </tr>
+            <tr>
                 <td><label>Status:</label></td>
                 <td>
                     <select  th:field="*{customerStatusDto.status}" >
@@ -47,13 +51,18 @@
                     </select>
                 </td>
             </tr>
+
+
+
             <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Save" class="save"/></td>
             </tr>
+
             </tbody>
         </table>
     </form>
+
     <div style=""></div>
     <p>
         <a href="./list">Back

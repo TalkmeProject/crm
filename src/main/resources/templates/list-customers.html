@@ -38,7 +38,7 @@
             </tr>
             <th:block th:each="tempCustomer : ${customers}">
                 <tr>
-                    <td><div class="media">
+                    <td><div class="media container">
                         <img class="mr-3" th:src="${tempCustomer.mainImage}" alt="Generic placeholder image">
                     </div></td>
                     <td th:text="${tempCustomer.firstName}"></td>

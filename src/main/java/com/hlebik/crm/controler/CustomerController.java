@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
+
 
     @GetMapping("/list")
     public String listCustomers(Model model) {
@@ -33,8 +35,8 @@ public class CustomerController {
     }
 
     @PostMapping("/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customer") CustomerDto customerDto) {
-        customerService.saveCustomer(customerDto);
+    public String saveCustomer(@ModelAttribute("customer") CustomerDto customerDto, @RequestParam("file") MultipartFile file) {
+        customerService.saveCustomer(customerDto, file);
         return "redirect:/customer/list";
     }
 

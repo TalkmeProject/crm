@@ -45,3 +45,13 @@ tr:nth-child(odd) {background: #BBBBBB}
     margin-bottom: 15px;
     background: #cccccc;
 }
+
+.container img {
+    width: 64px;
+    height: auto;
+}
+
+.container {
+    width: 64px;
+    height: 64px;
+}

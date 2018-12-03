@@ -5,6 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -12,11 +13,13 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 import java.util.stream.Stream;
 
 @Service
 public class FileSystemStorageService implements StorageService {
 
+    public static final String IMAGE_ROOT = "http://localhost:8080/image/files/";
     private final Path rootLocation;
 
     @Autowired
@@ -25,15 +28,24 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
+        StringBuilder fileName = getFileName(file);
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName.toString()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
+        return IMAGE_ROOT + fileName;
+    }
+
+    private StringBuilder getFileName(MultipartFile file) {
+        Random r = new Random();
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(System.currentTimeMillis()).append(r.nextInt()).append(".").append(StringUtils.getFilenameExtension(file.getOriginalFilename()));
+        return fileName;
     }
 
     @Override
@@ -58,10 +70,9 @@ public class FileSystemStorageService implements StorageService {
         try {
             Path file = load(filename);
             Resource resource = new UrlResource(file.toUri());
-            if(resource.exists() || resource.isReadable()) {
+            if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new StorageFileNotFoundException("Could not read file: " + filename);
 
             }
@@ -78,7 +89,10 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void init() {
         try {
-            Files.createDirectory(rootLocation);
+            if (!Files.exists(rootLocation)) {
+                deleteAll();
+                Files.createDirectory(rootLocation);
+            }
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }

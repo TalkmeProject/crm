@@ -5,9 +5,11 @@ import com.hlebik.crm.dbo.CustomerDbo;
 import com.hlebik.crm.dbo.CustomerStatusDbo;
 import com.hlebik.crm.dto.CustomerDto;
 import com.hlebik.crm.repository.CustomerRepository;
+import com.hlebik.crm.storage.StorageService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,13 +20,16 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerConverter customerConverter;
     private final CustomerStatusService customerStatusService;
+    private final StorageService storageService;
 
     public List<CustomerDto> getCustomers() {
         List<CustomerDbo> customerDbos = customerRepository.findAll(Sort.by("lastName"));
         return customerConverter.convertToDto(customerDbos);
     }
 
-    public void saveCustomer(CustomerDto customerDto) {
+    public void saveCustomer(CustomerDto customerDto, MultipartFile file) {
+        String MainImageName = storageService.store(file);
+        customerDto.setMainImage(MainImageName);
         CustomerDbo customerDbo = customerConverter.convertToDbo(customerDto);
         CustomerStatusDbo customerStatusDbo = customerStatusService.getStatus(customerDbo.getCustomerStatusDbo());
         customerDbo.setCustomerStatusDbo(customerStatusDbo);
