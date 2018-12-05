@@ -1,5 +1,5 @@
 package com.hlebik.crm.enumerated;
 
 public enum Role {
-    USER
+    ROLE_USER, ROLE_ADMIN
 }

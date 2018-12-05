@@ -1,5 +1,6 @@
 package com.hlebik.crm.config;
 
+import com.hlebik.crm.enumerated.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/registration", "/css/**", "/js/**", "/img/**","/webjars/**", "/api/**").permitAll()
+                .antMatchers("/customer/showFormForAdd", "/customer/saveCustomer").hasAuthority(Role.ROLE_ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -29,7 +29,7 @@ public class UserService {
         UserDbo userDbo = userConverter.convertToDbo(user);
         userDbo.setPassword(bCryptPasswordEncoder.encode(userDbo.getPassword()));
         userDbo.setActive(true);
-        userDbo.setRoles(Collections.singleton(Role.USER));
+        userDbo.setRoles(Collections.singleton(Role.ROLE_USER));
         userRepository.save(userDbo);
         return "redirect:/login";
     }

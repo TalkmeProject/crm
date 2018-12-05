@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>List Customers</title>
@@ -24,9 +24,11 @@
 
 <div id="container">
     <div id="content">
-        <input type="button" value="Add Customer"
-               onclick="window.location.href='showFormForAdd'; return false;"
-               class="add-button" />
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <input type="button" value="Add Customer"
+                   onclick="window.location.href='showFormForAdd'; return false;"
+                   class="add-button" />
+        </div>
         <table>
             <tr>
                 <th>Photo</th>
