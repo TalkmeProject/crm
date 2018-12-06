@@ -55,3 +55,13 @@ tr:nth-child(odd) {background: #BBBBBB}
     width: 64px;
     height: 64px;
 }
+
+.big-container{
+width: 200px;
+    height: auto;
+}
+
+.big-img{
+width: 200px;
+    height: auto;
+}
