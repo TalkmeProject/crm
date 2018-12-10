@@ -1,9 +1,11 @@
 package com.hlebik.crm.controler;
 
+import com.hlebik.crm.dbo.CustomerDbo;
 import com.hlebik.crm.dto.CustomerDto;
 import com.hlebik.crm.enumerated.Status;
 import com.hlebik.crm.service.CustomerService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,5 +60,16 @@ public class CustomerController {
         CustomerDto customerDto = customerService.getCustomer(id);
         model.addAttribute("customer", customerDto);
         return "user-info";
+    }
+
+    @GetMapping("/showMyHomePage")
+    public String showMyHomePage(Model model, Authentication authentication){
+        CustomerDto customerDto = customerService.findCustomerByUserName(authentication.getName());
+        if (customerDto.getId() == 0){
+            model.addAttribute("customer", customerDto);
+            model.addAttribute("status", Status.values());
+            return "customer-form";
+        }
+        return "redirect:/customer/showMoreInfo?customerId=" + customerDto.getId();
     }
 }

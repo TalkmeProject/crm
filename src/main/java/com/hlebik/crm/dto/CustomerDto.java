@@ -16,5 +16,7 @@ public class CustomerDto {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private CustomerStatusDto customerStatusDto;
-
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private UserDto userDto;
 }

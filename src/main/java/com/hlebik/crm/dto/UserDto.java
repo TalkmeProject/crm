@@ -18,4 +18,7 @@ public class UserDto {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<Role> roles;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private CustomerDto customerDto;
 }

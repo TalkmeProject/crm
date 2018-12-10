@@ -26,4 +26,9 @@ public class UserDbo {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<Role> roles;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userDbo")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private CustomerDbo customerDbo;
 }

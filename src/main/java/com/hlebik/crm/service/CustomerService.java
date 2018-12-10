@@ -47,4 +47,12 @@ public class CustomerService {
     public void deleteCustomer(long id) {
         customerRepository.deleteById(id);
     }
+
+    public CustomerDto findCustomerByUserName(String name) {
+        Optional<CustomerDbo> customerDbo = customerRepository.findByUserDboUserName(name);
+        if (customerDbo.isPresent()){
+            return customerConverter.convertToDto(customerDbo.get());
+        }
+        else return new CustomerDto();
+    }
 }

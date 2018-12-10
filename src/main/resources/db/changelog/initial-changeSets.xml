@@ -110,4 +110,16 @@
         <addForeignKeyConstraint baseTableName="user_role" baseColumnNames="user_id" constraintName="fk_user_role_user" referencedTableName="user"
                                  referencedColumnNames="id"/>
     </changeSet>
+
+    <changeSet id="add foreign key between user and customer" author="idglebik">
+
+        <addColumn tableName="customer">
+            <column name ="user_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="customer" baseColumnNames="user_id"
+                                 constraintName="fk_customer_user" referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
