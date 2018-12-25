@@ -66,5 +66,4 @@ public class FileUploadTests {
 
         this.mvc.perform(get("/files/test.txt")).andExpect(status().isNotFound());
     }
-
 }

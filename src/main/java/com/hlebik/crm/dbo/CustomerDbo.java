@@ -29,7 +29,7 @@ public class CustomerDbo {
     @ToString.Exclude
     private CustomerStatusDbo customerStatusDbo;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
