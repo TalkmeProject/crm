@@ -1,75 +1,49 @@
 package com.hlebik.crm.controler;
 
-import com.hlebik.crm.dbo.CustomerDbo;
 import com.hlebik.crm.dto.CustomerDto;
-import com.hlebik.crm.enumerated.Status;
 import com.hlebik.crm.service.CustomerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/customer")
 @AllArgsConstructor
 public class CustomerController {
 
     private final CustomerService customerService;
 
-
     @GetMapping("/list")
-    public String listCustomers(Model model) {
-        List<CustomerDto> customersList = customerService.getCustomers();
-        model.addAttribute("customers", customersList);
-        return "list-customers";
+    public ResponseEntity<List<CustomerDto>> listCustomers() {
+        return customerService.getCustomers();
     }
 
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model model) {
-        CustomerDto customerDto = new CustomerDto();
-        model.addAttribute("customer", customerDto);
-        model.addAttribute("status", Status.values());
-        return "customer-form";
+    public ResponseEntity<CustomerDto> showFormForAdd() {
+        return ResponseEntity.ok(new CustomerDto());
     }
 
     @PostMapping("/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customer") CustomerDto customerDto, @RequestParam("file") MultipartFile file) {
+    public void saveCustomer(@RequestParam final CustomerDto customerDto, @RequestParam final MultipartFile file) {
         customerService.saveCustomer(customerDto, file);
-        return "redirect:/customer/list";
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormUpdate(@RequestParam("customerId") long id, Model model) {
-        CustomerDto customerDto = customerService.getCustomer(id);
-        model.addAttribute("customer", customerDto);
-        return "customer-form";
+    public ResponseEntity<CustomerDto> showFormUpdate(@RequestParam("customerId") final long id) {
+        return ResponseEntity.ok(customerService.getCustomer(id));
     }
 
     @GetMapping("/delete")
-    public String deleteCustomer(@RequestParam("customerId") long id, Model model) {
+    public void deleteCustomer(@RequestParam("customerId") final long id) {
         customerService.deleteCustomer(id);
-        return "redirect:/customer/list";
-    }
-
-    @GetMapping("/showMoreInfo")
-    public String showMoreInfo(@RequestParam("customerId") long id, Model model){
-        CustomerDto customerDto = customerService.getCustomer(id);
-        model.addAttribute("customer", customerDto);
-        return "user-info";
     }
 
     @GetMapping("/showMyHomePage")
-    public String showMyHomePage(Model model, Authentication authentication){
-        CustomerDto customerDto = customerService.findCustomerByUserName(authentication.getName());
-        if (customerDto.getId() == 0){
-            model.addAttribute("customer", customerDto);
-            model.addAttribute("status", Status.values());
-            return "customer-form";
-        }
-        return "redirect:/customer/showMoreInfo?customerId=" + customerDto.getId();
+    public ResponseEntity<CustomerDto> showMyHomePage(@RequestParam final Authentication authentication) {
+        return customerService.findCustomerByUserName(authentication.getName());
     }
 }

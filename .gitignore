@@ -27,4 +27,5 @@
 .jar
 .war
 
-/webapp/resources/images/*
+/images/*
+/log/

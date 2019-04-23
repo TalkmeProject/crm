@@ -21,7 +21,7 @@
     <form th:action="@{saveCustomer}" th:object="${customer}" enctype="multipart/form-data"
                method="POST">
         <input type="hidden" name="id" th:value="${customer.id}"/>
-        <input type="hidden" name="id" th:value="${customer.userDto.id}"/>
+        <input type="hidden" name="mainImage" th:value="${customer.mainImage}"/>
         <table>
             <tbody>
             <tr>

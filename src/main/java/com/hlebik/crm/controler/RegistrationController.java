@@ -3,31 +3,26 @@ package com.hlebik.crm.controler;
 import com.hlebik.crm.dto.UserDto;
 import com.hlebik.crm.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @AllArgsConstructor
 public class RegistrationController {
+
     private final UserService userService;
 
     @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("user", new UserDto());
-        return "registration";
+    public ResponseEntity<UserDto> registration() {
+        return new ResponseEntity<>(new UserDto(), HttpStatus.OK);
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("user") UserDto user, Model model) {
-        return userService.makeRegistration(user, model);
-    }
-
-    @GetMapping("/")
-    public String main(Model model) {
-
-        return "redirect:/customer/list";
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto user) {
+        return userService.makeRegistration(user);
     }
 }

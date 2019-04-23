@@ -61,7 +61,7 @@ public class FileUploadTests {
     @SuppressWarnings("unchecked")
     @Test
     public void should404WhenMissingFile() throws Exception {
-        given(this.storageService.loadAsResource("test.txt"))
+        given(storageService.loadAsResource("test.txt"))
                 .willThrow(StorageFileNotFoundException.class);
 
         this.mvc.perform(get("/files/test.txt")).andExpect(status().isNotFound());

@@ -11,8 +11,7 @@ public class CustomerStatusService {
 
     private final CustomerStatusRepository customerStatusRepository;
 
-    public CustomerStatusDbo getStatus(CustomerStatusDbo customerStatusDbo) {
-
+    public CustomerStatusDbo getStatus(final CustomerStatusDbo customerStatusDbo) {
         return customerStatusRepository.findByStatus(customerStatusDbo.getStatus());
     }
 }
