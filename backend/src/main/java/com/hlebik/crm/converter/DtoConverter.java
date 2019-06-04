@@ -22,6 +22,8 @@ public interface DtoConverter<T, B> {
         return dbo != null ? dbo.stream().map(this::convertToDto).collect(Collectors.toList()) : null;
     }
 
+
+
     default List<B> convertToDbo(final List<T> dto) {
         return dto != null ? dto.stream().map(this::convertToDbo).collect(Collectors.toList()) : null;
     }

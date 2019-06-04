@@ -13,9 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties(StorageProperties.class)
 public class MvcConfig implements WebMvcConfigurer {
 
+/*
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
     }
+*/
 
     @Bean
     CommandLineRunner init(StorageService storageService) {

@@ -1,3 +1,4 @@
+/*
 package com.hlebik.crm.config;
 
 import com.hlebik.crm.enumerated.Role;
@@ -51,3 +52,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        return new BCryptPasswordEncoder();
     }
 }
+*/

@@ -4,8 +4,11 @@ import com.hlebik.crm.dto.CustomerDto;
 import com.hlebik.crm.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -42,8 +45,8 @@ public class CustomerController {
         customerService.deleteCustomer(id);
     }
 
-    @GetMapping("/showMyHomePage")
-    public ResponseEntity<CustomerDto> showMyHomePage(@RequestParam final Authentication authentication) {
-        return customerService.findCustomerByUserName(authentication.getName());
-    }
+    //  @GetMapping("/showMyHomePage")
+    //  public ResponseEntity<CustomerDto> showMyHomePage(@RequestParam final Authentication authentication) {
+    //     return customerService.findCustomerByUserName(authentication.getName());
+    // }
 }

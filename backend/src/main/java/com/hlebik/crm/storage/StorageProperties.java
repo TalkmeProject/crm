@@ -9,7 +9,7 @@ public class StorageProperties {
     /**
      * Folder location for storing files
      */
-    private String location = "src/main/webapp/resources/images";
+    private String location = "backend/src/main/webapp/resources/images";
 
     public String getLocation() {
         return location;
